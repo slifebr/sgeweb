@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.slifebr</groupId>
+	<artifactId>sge-web</artifactId>
+	<version>1.0.0</version>
+	<packaging>war</packaging>
+
+	<name>sge-web</name>
+	<url>http://maven.apache.org</url>
+	<!-- == mvn flyway:migrate 
+		Para alterar as credenciais em tempo de execução, entre com o seguinte comando 
+		no terminal (Os valores entre aspas substituirão os valores default estabelecidos 
+		no arquivo pom.xml): mvn flyway:migrate -Durl.db="jdbc:postgresql://localhost:5432/bd_producao" 
+		-Duser.db="pg_prod" -Dpassword.db="pg_prod_pass" === -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
+		
+		<java.version>11</java.version>
+		<postgre.version>42.2.2</postgre.version>
+
+		<!-- propriedades do banco -->
+		<url.db>jdbc:postgresql://localhost:5432/sgeweb</url.db>
+		<user.db>postgres</user.db>
+		<password.db>slife</password.db>
+
+	</properties>
+	<!-- CONFIGURAR VERSÃO DO JAVA -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<release>${java.version}</release>
+				</configuration>
+
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>5.2.4</version>
+				<configuration>
+					<url>${url.db}</url>
+					<user>${user.db}</user>
+					<password>${password.db}</password>
+					<baselineOnMigrate>true</baselineOnMigrate>
+				</configuration>
+
+			</plugin>
+
+		</plugins>
+	</build>
+
+
+	<!-- dependencias -->
+	<dependencies>
+		<!-- Banco de dados -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgre.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- flywaydb -->
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
