@@ -21,7 +21,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		
 		<java.version>11</java.version>
-		<postgre.version>42.2.2</postgre.version>
+		<postgre.version>42.4.1</postgre.version>
 
 		<!-- propriedades do banco -->
 		<url.db>jdbc:postgresql://localhost:5432/sgeweb</url.db>
